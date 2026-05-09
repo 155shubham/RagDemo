@@ -1,12 +1,11 @@
-
-from langchain_core import Document
+from langchain_core.documents import Document
 from typing import List
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 import os
 
 
-class loader:
+class Loader:
     def __init__(self, path):
         """Initialise file path."""
         self.path = path

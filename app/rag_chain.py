@@ -1,15 +1,15 @@
 from typing import List
-from langchain_core import Document
+from langchain_core.documents import Document
 from langchain_openai import ChatOpenAI
-from app.vector_store import vector_store
+from app.vector_store import Vector_Store
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StdOutputParser
+from langchain_core.output_parsers import StrOutputParser
 
 
-class rag_chain:
-    def __init__(self, vs: vector_store):
+class Rag_Chain:
+    def __init__(self, vs: Vector_Store):
         self.chain = None
-        self.vs = vector_store
+        self.vs = vs
         pass
 
     async def query(self, question: str) -> str:
@@ -17,9 +17,9 @@ class rag_chain:
         Note:
             - Must return an answer.
         """
-        documents = self.vs.get_relevant_documents(question)
+        documents = self.get_relevant_documents(question)
         context = "\n\n".join([doc.page_content for doc in documents])
-        answer = await self.chain.invoke({
+        answer = await self.chain.ainvoke({
             "question": question,
             "context": context
         })
@@ -47,7 +47,7 @@ class rag_chain:
         prompt = self.get_prompt()
 
         # LCEL chain
-        self.chain = prompt | llm | StdOutputParser()
+        self.chain = prompt | llm | StrOutputParser()
 
     def get_prompt(self) -> str:
         """Get prompt for RAG chain.
