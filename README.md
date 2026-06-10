@@ -1,3 +1,6 @@
+# if you hav ealready cloned repo and uv installed, just run this 
+uv sync
+
 # Create project
 
 mkdir ragdemo
@@ -17,7 +20,7 @@ source .venv/bin/activate
 
 # Activate venv (Windows PowerShell)
 
-# .venv\Scripts\Activate.ps1
+.venv\Scripts\Activate.ps1
 
 # Add dependencies
 
