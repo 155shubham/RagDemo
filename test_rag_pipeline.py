@@ -1,6 +1,6 @@
 import asyncio
 
-from app.loader import Loader
+from app.doc_loader import DocLoader
 from app.vector_store import Vector_Store
 from app.rag_chain import Rag_Chain
 from pathlib import Path
@@ -16,8 +16,8 @@ async def test_rag_pipeline():
     # Here you would set up your RAG pipeline and run tests against it.
 
     # print("txt_file_path:", txt_file_path)
-    doc_loader = Loader(path=txt_file_path)
-    documents = doc_loader.document_load()
+    doc_loader = DocLoader(path=txt_file_path)
+    documents = doc_loader.plain_text_load()
     print(f"Loaded {len(documents)} document(s).")
 
     # Print first 200 characters of the first document

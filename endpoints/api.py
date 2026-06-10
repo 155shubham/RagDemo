@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from pathlib import Path
-from app.loader import Loader
+from app.doc_loader import DocLoader
 from app.vector_store import Vector_Store
 from app.rag_chain import Rag_Chain
 from app.config import OPENAPI_API_KEY
@@ -18,8 +18,8 @@ app.add_middleware(
 txt_file_path = (Path(__file__).resolve().parent.parent /
                  "data" / "information.txt")
 
-loader = Loader(path=txt_file_path)
-documents = loader.document_load()
+loader = DocLoader(path=txt_file_path)
+documents = loader.plain_text_load()
 
 vec_store = Vector_Store()
 vec_store.create_vector_store(documents)
